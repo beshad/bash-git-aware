@@ -6,7 +6,7 @@ find_git_branch() {
 
   CURRENT_PATH="$(pwd)"
 
-  if branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
+  if branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null); then
 
     if [ "$CURRENT_PATH" != "$LAST_GIT_PATH" ]; then
       (git remote update >/dev/null 2>&1 &)
@@ -16,7 +16,7 @@ find_git_branch() {
     if [[ "$branch" == "HEAD" ]]; then
       branch='detached*'
     fi
-    git_branch="($branch)"
+    git_branch="[$branch]"
   else
     git_branch=""
   fi
@@ -24,7 +24,7 @@ find_git_branch() {
 
 find_git_dirty() {
   local status
-  status="$(git status 2> /dev/null)"
+  status="$(git status 2>/dev/null)"
 
   git_dirty=""
 
@@ -33,21 +33,21 @@ find_git_dirty() {
   fi
 
   if [[ "$status" =~ "Untracked files" ]]; then
-    git_dirty+="✴️ "
+    git_dirty+="⭐ "
   elif [[ "$status" =~ "Changes not staged for commit" ]]; then
-    git_dirty+="✴️ "
+    git_dirty+="⭐ "
   fi
 
   if [[ "$status" =~ "Your branch is ahead of" ]]; then
-    git_dirty+="⬆️ "
+    git_dirty+="⤴️ "
   fi
 
   if [[ "$status" =~ "Your branch is behind" ]]; then
-    git_dirty+="⬇️ "
+    git_dirty+="⤵️ "
   fi
 
   if [[ $"$status" =~ "Changes to be committed" ]]; then
-    git_dirty+="➡️ "
+    git_dirty+="💾 "
   fi
 
   if [[ $"$status" =~ "have diverged" ]]; then
