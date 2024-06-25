@@ -1,4 +1,4 @@
-# Bash Git Aware (OSX)
+# Bash Git Aware (OSX & Linux)
 
 Adds symbols showing git status:
 
