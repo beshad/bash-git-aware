@@ -27,7 +27,7 @@ find_git_branch() {
     fi
 
     # Set the git_branch variable
-    git_branch=" $branch "
+    git_branch=" 🌴$branch "
   else
     git_branch=""
   fi
